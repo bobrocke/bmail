@@ -1,0 +1,65 @@
+[package]
+name = "bmail"
+version = "0.1.0"
+edition = "2021"
+description = "IMAP email client optimized for Omarchy Linux"
+license = "MIT"
+
+[dependencies]
+# GUI
+eframe = "0.31"
+egui = "0.31"
+
+futures = "0.3"
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Email protocols
+async-imap = { version = "0.9", default-features = false, features = [
+  "runtime-tokio",
+] }
+async-native-tls = { version = "0.5", default-features = false, features = [
+  "runtime-tokio",
+] }
+lettre = { version = "0.11", default-features = false, features = [
+  "smtp-transport",
+  "tokio1-native-tls",
+  "builder",
+] }
+
+# Database
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+# Config & serialization
+toml = "0.8"
+serde = { version = "1", features = ["derive"] }
+
+# Theme live-reload: polls Omarchy's signal file every 2s (no inotify dependency)
+
+# Desktop notifications (Mako via D-Bus)
+notify-rust = "4"
+
+# HTML to markdown conversion
+html2md = "0.2"
+
+# XDG paths
+dirs = "5"
+
+# Password hashing (for storing app password — optional future use)
+# We store plaintext for now per design decision
+
+# MIME parsing
+mailparse = "0.15"
+quoted_printable = "0.5"
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Logging
+log = "0.4"
+env_logger = "0.11"
+
+# Compile-time static maps for theme lookup
+phf = { version = "0.11", features = ["macros"] }
+once_cell = "1"
